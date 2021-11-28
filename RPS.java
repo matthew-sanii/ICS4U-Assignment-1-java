@@ -1,13 +1,12 @@
 /*
-* This is a program that randomly gives marks
-* to assignments in an array.
+* The Rock Paper Scissors program that makes you play
+* Rock Paper Scissors with a computer.
 *
 * @author  Matthew Sanii
 * @version 1.0
 * @since   2021-26-11
 */
 
-import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -15,6 +14,11 @@ import java.util.Scanner;
 * This is the marks program.
 */
 final class RPS {
+
+    final String rock = "rock";
+    final String paper = "paper";
+    final String scissors = "scissors";
+
     /**
     * Prevent instantiation
     * Throw an exception IllegalStateException.
@@ -48,6 +52,14 @@ final class RPS {
         return option;
     }
 
+    /**
+    * The compare function that compares the user and computer's choices.
+    *
+    * @param player The player's input
+    * @param computer The computer's input
+    *
+    * @return Who wins the round
+    */
     public static int compare(String player, String computer) {
         final String rock = "rock";
         final String paper = "paper";
@@ -72,6 +84,11 @@ final class RPS {
         return result;
     }
 
+    /**
+    * The starting main() function.
+    *
+    * @param args Name of file containing a string of numbers
+    */
     public static void main(final String[] args) {
         final Scanner decision = new Scanner(System.in);
         int versus = 0;
@@ -79,6 +96,11 @@ final class RPS {
             System.out.print("Rock, Paper, or Scissors? ");
             String playerChoice = decision.nextLine();
             playerChoice = playerChoice.toLowerCase();
+            if (!playerChoice.equals("rock") && !playerChoice.equals("paper")
+                                         && !playerChoice.equals("scissors")) {
+                System.out.println("Invalid input");
+                System.exit(0);
+            }
             String computerChoice = opponentChoice();
             System.out.println("Computer chose " + computerChoice + ".");
             versus = compare(playerChoice, computerChoice);

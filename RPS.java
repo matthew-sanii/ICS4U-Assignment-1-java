@@ -38,7 +38,6 @@ final class RPS {
         final int max = 3;
         String option = "";
         final int random_choice = (int) Math.floor(Math.random() * (max - min + 1) + min);
-        System.out.println(random_choice);
         if (random_choice == 1) {
             option = "rock";
         } else if (random_choice == 2) {
@@ -49,45 +48,41 @@ final class RPS {
         return option;
     }
 
-    public static String compare(String player, String computer) {
-        
-
+    public static int compare(String player, String computer) {
+        final String rock = "rock";
+        final String paper = "paper";
+        final String scissors = "scissors";
+        final String failure = "You lose!";
+        int result = 0;
+        if (player.equals(computer)) {
+            System.out.println("Tie!");
+        } else if (player.equals(rock) && computer.equals(paper)) {
+            System.out.println(failure);
+            result += 1;
+        } else if (player.equals(paper) && computer.equals(scissors)) {
+            System.out.println(failure);
+            result += 1;
+        } else if (player.equals(scissors) && computer.equals(rock)) {
+            System.out.println(failure);
+            result += 1;
+        } else {
+            System.out.println("You win!");
+            result += 1;
+        }
+        return result;
     }
-
-
-
-
 
     public static void main(final String[] args) {
         final Scanner decision = new Scanner(System.in);
-        while (true) {
-            String rock = "rock";
-            String paper = "paper";
-            String scissors = "scissors";
-            String failure = "You lose!";
+        int versus = 0;
+        while (versus == 0) {
             System.out.print("Rock, Paper, or Scissors? ");
             String playerChoice = decision.nextLine();
+            playerChoice = playerChoice.toLowerCase();
             String computerChoice = opponentChoice();
-            System.out.println(computerChoice);
-            if (playerChoice.toLowerCase() == computerChoice) {
-                System.out.println("Tie!");
-            } else if (playerChoice.toLowerCase().equals(rock) && computerChoice.equals(paper)) {
-                System.out.println(failure);
-                
-            } else if (playerChoice.toLowerCase().equals(paper) && computerChoice.equals(scissors)) {
-                System.out.println(failure);
-                
-            } else if (playerChoice.toLowerCase().equals(scissors) && computerChoice.equals(rock)) {
-                System.out.println(failure);
-                
-            } else {
-                System.out.println("You win!");
-                
-            }
-            
-}
-}
-
-
-}
+            System.out.println("Computer chose " + computerChoice + ".");
+            versus = compare(playerChoice, computerChoice);
+        }
+        System.out.println("\nDone.");
+    }
 }
